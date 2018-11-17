@@ -27,6 +27,9 @@ def add_space_to_string_if_length_less_than(str_input, int_length):
         
 # add_space_to_string_if_length_less_than("sd", 9)
 
+
+
+# Source: https://stackoverflow.com/questions/415511/how-to-get-the-current-time-in-python
 from time import gmtime, strftime
 def get_actuel_date():
     str_return = strftime("%Y-%m-%d", gmtime())
