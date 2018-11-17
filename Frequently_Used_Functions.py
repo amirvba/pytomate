@@ -14,3 +14,40 @@ def get_filenames_with_ending(str_file_address, str_ending):
             lst_return.append(str_item)
             
     return lst_return
+
+
+def add_space_to_string_if_length_less_than(str_input, int_length):
+    
+    assert type(str_input)==str, "str_input must be string!"
+    assert type(int_length) == int, "int_length must be integer!"
+    
+    int_dif = int_length - len(str_input)
+    if int_dif > 0:
+        str_input += " "*int_dif
+    return str_input
+        
+# add_space_to_string_if_length_less_than("sd", 9)
+
+from time import gmtime, strftime
+def get_actuel_date():
+    str_return = strftime("%Y-%m-%d", gmtime())
+    str_return = add_space_to_string_if_length_less_than(str_return, 10)
+    
+    return str_return
+
+get_actuel_date()
+
+
+from time import gmtime, strftime
+def get_actual_time():
+    str_return = strftime("%H.%M.%S", gmtime())
+    str_return = add_space_to_string_if_length_less_than(str_return, 8)
+        
+    return str_return
+get_actual_time()
+
+
+def get_actual_date_time():
+    return get_actuel_date() +"  "+ get_actual_time()
+
+get_actual_date_time()
