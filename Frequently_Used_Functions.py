@@ -31,13 +31,13 @@ def add_space_to_string_if_length_less_than(str_input, int_length):
 
 # Source: https://stackoverflow.com/questions/415511/how-to-get-the-current-time-in-python
 from time import gmtime, strftime
-def get_actuel_date():
+def get_actual_date():
     str_return = strftime("%Y-%m-%d", gmtime())
     str_return = add_space_to_string_if_length_less_than(str_return, 10)
     
     return str_return
 
-get_actuel_date()
+get_actual_date()
 
 
 from time import gmtime, strftime
@@ -50,6 +50,6 @@ get_actual_time()
 
 
 def get_actual_date_time():
-    return get_actuel_date() +"  "+ get_actual_time()
+    return get_actual_date() +"  "+ get_actual_time()
 
 get_actual_date_time()
