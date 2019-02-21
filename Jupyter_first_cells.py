@@ -12,7 +12,15 @@ df = my_df.copy(deep= True)
 df
 
 
-df_report = pd.DataFrame(np.arange(len(df)), columns = [int_counter, 
+
+
+str_ending = 
+str_file_address =
+lst_all_files = get_filenames_with_ending(str_file_address, str_ending)
+print(len(lst_all_files))
+lst_all_files[:5]
+
+df_report = pd.DataFrame(np.arange(len(lst_all_files)), columns = [int_counter, 
                                                         str_file_name,
                                                         int_file_length])
 df_report.head()
@@ -32,5 +40,5 @@ for i, item in enumerate():
 str_data_name = " - {}.xlsx".format(my_now())
 str_save_to = str_file_address + "\\" + str_data_name
 print(str_save_to)
-.to_excel(str_save_to, index = None)
-.head()
+df_report.to_excel(str_save_to, index = None)
+df_report.head()
