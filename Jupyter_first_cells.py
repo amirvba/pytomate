@@ -14,9 +14,9 @@ df
 
 
 
-str_ending = 
-str_file_address =
-lst_all_files = get_filenames_with_ending(str_file_address, str_ending)
+str_ending = ".csv"
+str_file_address = r""
+lst_all_files = get_filenames_with_ending(str_file_address+ "\\", str_ending)
 print(len(lst_all_files))
 lst_all_files[:5]
 
