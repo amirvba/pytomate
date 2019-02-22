@@ -20,7 +20,8 @@ lst_all_files[:5]
 
 df_report = pd.DataFrame(np.arange(len(lst_all_files)), columns = [str_counter, 
                                                                     str_file_name,
-                                                                    int_file_length])
+                                                                    int_file_length,
+                                                                  int_duration])
 df_report.head()
 
 lst_df_input = []
@@ -48,7 +49,7 @@ str_msg += "{} \t| Number of files\n".format()
 str_msg += "{} \t| \n".format()
 str_msg += "{} \t| \n".format()
 
-str_msg += "{} s. \t| Duration \n".format()
+str_msg += "{} s. \t| Duration \n".format(df_report['int_duration'].sum())
 str_msg += "{} \t| The script was run by the user\n\n".format()
 
 
