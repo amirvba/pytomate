@@ -9,7 +9,7 @@ def get_filenames_with_ending(str_file_address, str_ending):
     lst_filenames = os.listdir(str_file_address)
     
     for str_item in lst_filenames:
-        if str_item[:-len(str_ending)]==str_ending:
+        if str_item[-len(str_ending):]==str_ending:
             lst_return.append(str_item)
             
     return lst_return
