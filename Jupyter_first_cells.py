@@ -11,10 +11,28 @@ my_df
 df = my_df.copy(deep= True)
 df
 
+#################
+import os
 
+def get_filenames_with_ending(str_file_address, str_ending):
+   
+    assert type(str_ending) == str , "The ending must be string!"
+    assert type(str_file_address) == str , "The file_address must be string!"
+   
+    lst_return = []
+    lst_filenames = os.listdir(str_file_address)
+    
+    for str_item in lst_filenames:
+        if str_item[-len(str_ending):]==str_ending:
+            lst_return.append(str_item)
+            
+    return lst_return
+
+ 
 str_ending = ".csv"
 str_file_address = r""
 lst_all_files = get_filenames_with_ending(str_file_address+ "\\", str_ending)
+#print(lst_all_files)
 print(len(lst_all_files))
 lst_all_files[:5]
 
@@ -25,7 +43,7 @@ df_report = pd.DataFrame(np.arange(len(lst_all_files)), columns = [str_counter,
 df_report.head()
 
 lst_df_input = []
-for my_counter, item in enumerate():
+for my_counter, item in enumerate(lst_all_files):
   print(len()-my_counter, item)
   
   my_df = pd.read_excel(str_file_address+"\\"+item)
