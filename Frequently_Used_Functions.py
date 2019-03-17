@@ -2,8 +2,8 @@ import os
 
 def get_filenames_with_ending(str_file_address, str_ending):
    
-    assert type(str_ending)==str , "The ending must be string!"
-    assert type(str_file_address)==str , "The file_address must be string!"
+    assert type(str_ending) == str , "The ending must be string!"
+    assert type(str_file_address) == str , "The file_address must be string!"
    
     lst_return = []
     lst_filenames = os.listdir(str_file_address)
@@ -15,13 +15,14 @@ def get_filenames_with_ending(str_file_address, str_ending):
     return lst_return
 
 
-# str_ending = 
-# str_file_address=
-# get_filenames_with_ending(str_file_address, str_ending)
+str_ending = ''
+str_file_address = ''
+lst_file_names = get_filenames_with_ending(str_file_address, str_ending)
+print(lst_file_names)
    
 def add_space_to_string_if_length_less_than(str_input, int_length):
     
-    assert type(str_input)==str, "str_input must be string!"
+    assert type(str_input ) == str, "str_input must be string!"
     assert type(int_length) == int, "int_length must be integer!"
     
     int_dif = int_length - len(str_input)
