@@ -4,7 +4,10 @@ import matplotlib
 import os
 import re
 
-#################
+def get_now(): 
+    from datetime import datetime 
+    return datetime.now().strftime("%Y-%m-%d %H.%M.%S") 
+
 
 def get_files(filepath, str_ending = '*.json'):
     lst_files = []
@@ -73,7 +76,7 @@ def reoder_columns(df, lst_ordered, bl_left=True):
     if bl_left:
         lst_col = lst_ordered + lst_col
 
-    else bl_left:
+    else:
         lst_col = lst_col + lst_ordered
 
     return df[lst_col]
