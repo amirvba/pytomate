@@ -1,11 +1,14 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+from datetime import datetime
 import os
 import re
 
 def get_df_log(dct_log, lst_rows_top = [], lst_rows_down = []):
     
+    
+    dct_log['script duration'] = datetime.now() - dct_log['started_at']
     df_log = pd.DataFrame([dct_log])
     
     df_log = reoder_columns(df_log, lst_rows_top , bl_left=True)
