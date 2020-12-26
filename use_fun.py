@@ -6,6 +6,15 @@ import re
 
 #################
 
+def get_files(filepath, str_ending = '*.json'):
+    lst_files = []
+    for root, dirs, files in os.walk(filepath):
+        files = glob.glob(os.path.join(root, str_ending))
+        for f in files:
+            lst_files.append(os.path.abspath(f))
+    
+    return lst_files
+
 
 def get_excel_files_from_folder(str_file_address=""):
     '''
