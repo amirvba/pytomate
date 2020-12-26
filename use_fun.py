@@ -4,9 +4,33 @@ import matplotlib
 import os
 import re
 
+def get_df_log(dct_log, lst_rows_top = [], lst_rows_down = []):
+    
+    df_log = pd.DataFrame([dct_log])
+    
+    df_log = reoder_columns(df_log, lst_rows_top , bl_left=True)
+    df_log = reoder_columns(df_log, lst_rows_down, bl_left=False)
+    
+    df_log = df_log.T.reset_index()                                
+    df_log.rename(columns = {'index':'key', 0:'value'}, inplace= True)
+    
+    return df_log
+
+
+
 def get_now(): 
     from datetime import datetime 
     return datetime.now().strftime("%Y-%m-%d %H.%M.%S") 
+
+
+def get_time(): 
+    from datetime import datetime 
+    return datetime.now().strftime("%H.%M.%S") 
+
+
+def get_date(): 
+    from datetime import datetime 
+    return datetime.now().strftime("%Y-%m-%d") 
 
 
 def get_files(filepath, str_ending = '*.json'):
