@@ -5,8 +5,28 @@ import numpy as np
 import os
 import re
 
-def get_df_log(dct_log, lst_rows_top = [], lst_rows_down = []):
+
+def augment_reason(DF, index_reason, str_reason):
+        
+    if 'reason' not in DF.columns:
+        DF['reason'] = np.nan
+        print("Column 'reason' added to DataFrame.")
+        
     
+    index_final = DF['reason'].isna() & index_reason
+    DF.loc[index_final, 'reason'] = str_reason
+    DF.loc[index_reason, 'reason_incremental'] = DF.loc[index_reason, 'reason_incremental'].map(str) + " | " + str_reason
+
+    print("-----------------------")
+    print("reason \t|", str_reason)
+    print(index_reason.sum(), " | Count of rows affected by the reason.")
+    print( index_final.sum(), " | Count of rows affected by the reason, which werent affected already.")
+    print((~index_final).sum(), " | Count of remaining rows.")
+    
+    return DF
+
+
+def get_df_log(dct_log, lst_rows_top = [], lst_rows_down = []):
     
     if 'script started at' in dct_log.keys():
         dct_log['script duration'] = str(datetime.now() - dct_log['started_at'])
