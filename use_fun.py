@@ -5,17 +5,16 @@ import numpy as np
 import os
 import re
 
-
 def augment_reason(DF, index_reason, str_reason):
-        
-    if 'reason' not in DF.columns:
-        DF['reason'] = np.nan
-        print("Column 'reason' added to DataFrame.")
-        
+    
+    for item in ['reason', 'tried hypothesis']:
+        if item not in DF.columns:
+            DF[item] = np.nan
+            print(f"Column '{item}' added to DataFrame.")
     
     index_final = DF['reason'].isna() & index_reason
     DF.loc[index_final, 'reason'] = str_reason
-    DF.loc[index_reason, 'reason_incremental'] = DF.loc[index_reason, 'reason_incremental'].map(str) + " | " + str_reason
+    DF.loc[index_reason, 'tried hypothesis'] = DF.loc[index_reason, 'tried hypothesis'].map(str) + " | " + str_reason
 
     print("-----------------------")
     print("reason \t|", str_reason)
