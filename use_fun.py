@@ -5,46 +5,6 @@ import numpy as np
 import os
 import re
 
-def augment_reason(DF, index_reason, str_reason):
-    
-    for item in ['reason', 'tried hypothesis']:
-        if item not in DF.columns:
-            DF[item] = np.nan
-            print(f"Column '{item}' added to DataFrame.")
-    
-    index_final = DF['reason'].isna() & index_reason
-    DF.loc[index_final, 'reason'] = str_reason
-    DF.loc[index_reason, 'tried hypothesis'] = DF.loc[index_reason, 'tried hypothesis'].map(str) + " | " + str_reason
-
-    print("-----------------------")
-    print("reason \t|", str_reason)
-    print(index_reason.sum(), " \t| Count of rows affected by the reason.")
-    print( index_final.sum(), " \t| Count of rows affected by the reason, which werent affected already.")
-    print(DF['reason'].isna().sum(), " \t| Count of remaining rows.")
-    
-    return DF
-
-
-def augment_comment(DF, index_comment, str_comment):
-    '''
-    This function adds comments to the rows, which we havent found any reason for them.
-    These comment can show our guess about the values. If for example they are dupplicated but we dont know why,
-    it would be good to write it in the comments. It helps to resume the analysis in a meeting.
-    '''    
-    assert 'reason' in DF.columns, f"The column reason doesnt exist in the DataFrame."
-    index_final = DF['reason'].isna() & index_comment
-    DF.loc[index_final, 'comment'] = str_comment
-    
-    index_no_comment_no_reason = DF['reason'].isna() & ~index_comment
-    
-    
-    print("-----------------------")
-    print("comment |", str_comment)
-    print(index_comment.sum(), " \t| Count of rows affected by the comment.")
-    print(index_no_comment_no_reason.sum(), " \t| Count of remaining uncommented AND not reasoned rows.")
-    
-    return DF
-
 
 def get_df_log(dct_log, lst_rows_top = [], lst_rows_down = []):
     
@@ -148,3 +108,46 @@ def reoder_columns(df, lst_ordered, bl_left=True):
 
     else:
         return df[lst_col + lst_ordered]
+
+    
+    
+# The following two functions can be used for Root Cause Analysis:
+def augment_reason(DF, index_reason, str_reason):
+    
+    for item in ['reason', 'tried hypothesis']:
+        if item not in DF.columns:
+            DF[item] = np.nan
+            print(f"Column '{item}' added to DataFrame.")
+    
+    index_final = DF['reason'].isna() & index_reason
+    DF.loc[index_final, 'reason'] = str_reason
+    DF.loc[index_reason, 'tried hypothesis'] = DF.loc[index_reason, 'tried hypothesis'].map(str) + " | " + str_reason
+
+    print("-----------------------")
+    print("reason \t|", str_reason)
+    print(index_reason.sum(), " \t| Count of rows affected by the reason.")
+    print( index_final.sum(), " \t| Count of rows affected by the reason, which werent affected already.")
+    print(DF['reason'].isna().sum(), " \t| Count of remaining rows.")
+    
+    return DF
+
+
+def augment_comment(DF, index_comment, str_comment):
+    '''
+    This function adds comments to the rows, which we havent found any reason for them.
+    These comment can show our guess about the values. If for example they are dupplicated but we dont know why,
+    it would be good to write it in the comments. It helps to resume the analysis in a meeting.
+    '''    
+    assert 'reason' in DF.columns, f"The column reason doesnt exist in the DataFrame."
+    index_final = DF['reason'].isna() & index_comment
+    DF.loc[index_final, 'comment'] = str_comment
+    
+    index_no_comment_no_reason = DF['reason'].isna() & ~index_comment
+    
+    
+    print("-----------------------")
+    print("comment |", str_comment)
+    print(index_comment.sum(), " \t| Count of rows affected by the comment.")
+    print(index_no_comment_no_reason.sum(), " \t| Count of remaining uncommented AND not reasoned rows.")
+    
+    return DF
