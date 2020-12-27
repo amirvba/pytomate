@@ -20,7 +20,7 @@ def augment_reason(DF, index_reason, str_reason):
     print("reason \t|", str_reason)
     print(index_reason.sum(), " \t| Count of rows affected by the reason.")
     print( index_final.sum(), " \t| Count of rows affected by the reason, which werent affected already.")
-    print((~index_final).sum(), " \t| Count of remaining rows.")
+    print(DF['reason'].isna().sum(), " \t| Count of remaining rows.")
     
     return DF
 
