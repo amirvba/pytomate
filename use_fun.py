@@ -1,14 +1,17 @@
 import matplotlib.pyplot as plt
+from datetime import datetime
 import pandas as pd
 import numpy as np
-from datetime import datetime
 import os
 import re
 
 def get_df_log(dct_log, lst_rows_top = [], lst_rows_down = []):
     
     
-    dct_log['script duration'] = datetime.now() - dct_log['started_at']
+    if 'script started at' in dct_log.keys():
+        dct_log['script duration'] = str(datetime.now() - dct_log['started_at'])
+        dct_log['script started at'] = str(dct_log['script started at'])
+    
     df_log = pd.DataFrame([dct_log])
     
     df_log = reoder_columns(df_log, lst_rows_top , bl_left=True)
@@ -101,9 +104,7 @@ def reoder_columns(df, lst_ordered, bl_left=True):
     lst_col = [i for i in df.columns if i not in lst_ordered]
 
     if bl_left:
-        lst_col = lst_ordered + lst_col
+        return df[lst_ordered + lst_col]
 
     else:
-        lst_col = lst_col + lst_ordered
-
-    return df[lst_col]
+        return df[lst_col + lst_ordered]
