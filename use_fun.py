@@ -25,6 +25,27 @@ def augment_reason(DF, index_reason, str_reason):
     return DF
 
 
+def augment_comment(DF, index_comment, str_comment):
+    '''
+    This function adds comments to the rows, which we havent found any reason for them.
+    These comment can show our guess about the values. If for example they are dupplicated but we dont know why,
+    it would be good to write it in the comments. It helps to resume the analysis in a meeting.
+    '''    
+    assert 'reason' in DF.columns, f"The column reason doesnt exist in the DataFrame."
+    index_final = DF['reason'].isna() & index_comment
+    DF.loc[index_final, 'comment'] = str_comment
+    
+    index_no_comment_no_reason = DF['reason'].isna() & ~index_comment
+    
+    
+    print("-----------------------")
+    print("comment |", str_comment)
+    print(index_comment.sum(), " \t| Count of rows affected by the comment.")
+    print(index_no_comment_no_reason.sum(), " \t| Count of remaining uncommented AND not reasoned rows.")
+    
+    return DF
+
+
 def get_df_log(dct_log, lst_rows_top = [], lst_rows_down = []):
     
     if 'script started at' in dct_log.keys():
