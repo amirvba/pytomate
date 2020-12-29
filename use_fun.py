@@ -151,3 +151,16 @@ def augment_comment(DF, index_comment, str_comment):
     print(index_no_comment_no_reason.sum(), " \t| Count of remaining uncommented AND not reasoned rows.")
     
     return DF
+
+
+# Sankey example
+from ipysankeywidget import SankeyWidget
+
+links = [
+    {'source': 'start', 'target': 'A', 'value': 2},
+    {'source': 'start', 'target': 'B', 'value': 20},
+    {'source': 'B', 'target': 'C', 'value': 5},
+    {'source': 'B', 'target': 'D', 'value': 15},
+]
+
+SankeyWidget(links=links, margins=dict(top=0, bottom=0, left=50, right=100),  linkLabelFormat='.0f')
