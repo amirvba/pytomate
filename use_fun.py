@@ -164,3 +164,27 @@ links = [
 ]
 
 SankeyWidget(links=links, margins=dict(top=0, bottom=0, left=50, right=100),  linkLabelFormat='.0f')
+
+
+
+
+time_start = datetime.now()
+
+def get_deltatime_in_seconds(time_start):
+    return (datetime.now()-time_start).seconds
+
+def convert_seconds__days_hours_minutes_seconds(td):
+    str_return =  {'day': td//(60*60*24)%30
+              , 'hour':td//(60*60)%24
+              , 'minute':(td//60)%60
+              , 'second':td%60
+              }
+#     print(str_return)
+    return str_return
+
+def get_duration_in_days_hours_minutes_seconds(start_time):
+    duration_in_seconds = get_deltatime_in_seconds(start_time)
+    
+    return convert_seconds__days_hours_minutes_seconds(duration_in_seconds)
+    
+# get_duration_in_days_hours_minutes_seconds(start_time)
