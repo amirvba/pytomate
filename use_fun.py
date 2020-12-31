@@ -188,3 +188,10 @@ def get_duration_in_days_hours_minutes_seconds(start_time):
     return convert_seconds__days_hours_minutes_seconds(duration_in_seconds)
     
 # get_duration_in_days_hours_minutes_seconds(start_time)
+
+
+def get_dct_log():
+    import getpass
+    from datetime import datetime
+
+    return {'start_time': datetime.now(), 'Ran by': getpass.getuser(), 'Current working directory': os.getcwd()}
