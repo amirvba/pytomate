@@ -60,10 +60,11 @@
     "my-def-function": {
         "prefix": "deff",
         "body": [
-            "def ${1:get_}(${2:DF}, $3):",
-            "\treturn ",
+            "def ${1:function_name}(${2:DF}, $3):",
+            "    $4",
+            "    return ",
             "\n",
-            "${1:get_}()"
+            "$1()"
         ],
         "description": "def function"
     },
@@ -101,7 +102,7 @@
     "my-index-contains ": {
         "prefix": "indcon",
         "body": [
-            "index_$1 = ${2:df}[${2}['$3'].str.contains('$4', case = False, na=False, regex=False)]",
+            "index_${1:special} = ${2:df}[${2}['${3:Column_name}'].str.contains('$4', case = False, na=False, regex=False)]",
             "print(index_$1.sum())",
             "${2}.loc[index_$1, :]${0:.head()}"
         ],
@@ -110,10 +111,31 @@
     "my-index-equals ": {
         "prefix": "indq",
         "body": [
-            "index_$1 = ${2:df}[${2}['$3'] == '$4']",
+            "index_${1:special} = ${2:df}[${2}['${3:Column_name}'] == $4]",
             "print(index_$1.sum())",
             "${2}.loc[index_$1, :]${0:.head()}"
         ],
         "description": "searches for a value in column of df"
+    },
+    "my-clocl time": {
+        "prefix": "time_",
+        "body": [
+            "datetime.now().strftime('%H.%M.%S')"
+        ],
+        "description": "returns %H.%M.%S"
+    },
+    "my-date": {
+        "prefix": "date_",
+        "body": [
+            "datetime.now().strftime('%Y-%m-%d')"
+        ],
+        "description": "returns date (%Y-%m-%d)"
+    },
+    "my-now ": {
+        "prefix": "now_",
+        "body": [
+            "datetime.now().strftime('%Y-%m-%d %H.%M.%S')"
+        ],
+        "description": "returns now (%Y-%m-%d %H.%M.%S)"
     },
 }
