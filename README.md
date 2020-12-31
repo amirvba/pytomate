@@ -1,2 +1,2 @@
 # Pytomate
-My most used functions for automating using pyhton.
+My frequently used python functions and snippets for automating data processing.
