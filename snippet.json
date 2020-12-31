@@ -1,0 +1,107 @@
+{
+    /// Snippet file for VSCode
+    // Place your snippets for python here. Each snippet is defined under a snippet name and has a prefix, body and 
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+    // same ids are connected.
+    // Example:
+    "my-libraries": {
+        "prefix": "im",
+        "body": [
+            "from datetime import datetime",
+            "import pandas as pd",
+            "import numpy as np",
+            "import os",
+            "import re",
+            "\n"
+        ],
+        "description": "import the frequently used libraries"
+    },
+    "my-for-dictionary": {
+        "prefix": "fd",
+        "body": [
+            "for key_, value_ in ${1:dct_}.items():",
+            "\tif '$2' in key_:",
+            "\t\tprint(key_,value_)"
+        ],
+        "description": "for loop for dictionary"
+    },
+    "my-try": {
+        "prefix": "try",
+        "body": [
+            "try:",
+            "   $1",
+            "except Exception as e:",
+            "   print('Error',  e)",
+            "finally:",
+            "   $3",
+        ],
+        "description": "try except finally"
+    },
+    "my-if": {
+        "prefix": "iff",
+        "body": [
+            "if $1:",
+            "    $2",
+            "elif $3:",
+            "    $4",
+            "else:",
+            "    $5",
+        ],
+        "description": "try except finally"
+    },
+    "my-now": {
+        "prefix": "now",
+        "body": [
+            "$1 = datetime.now()",
+            "$0"
+        ],
+        "description": "writes: = datetime.now()"
+    },
+    "my-def-function": {
+        "prefix": "deff",
+        "body": [
+            "def ${1:get_}(${2:DF}):",
+            "\treturn ",
+            "\n",
+            "${1:get_}()"
+        ],
+        "description": "def function"
+    },
+    "my-for-item": {
+        "prefix": "fi",
+        "body": [
+            "for int_i, item in enumerate(${1:lst_}):",
+            "\tprint(f'{len(${1:lst_})-int_i} \\t| {item}')"
+        ],
+        "description": "for loop with enumeration"
+    },
+    "my-Print ": {
+        "prefix": "pf",
+        "body": [
+            "print(f'{$1} \\t| {$2}')"
+        ],
+        "description": "print(f'{} \t| {}')"
+    },
+    "my-Print2 ": {
+        "prefix": "pp",
+        "body": [
+            "print($1)"
+        ],
+        "description": "print()"
+    },
+    "amir-flask-run ": {
+        "prefix": "ifm",
+        "body": [
+            "if __name__ == '__main__': \n\tapp.run(debug=True)"
+        ],
+        "description": "print()"
+    },
+    "amir-flask-app-route ": {
+        "prefix": "aa",
+        "body": [
+            "app.route('$1')\ndef $2():\n\treturn render_template('$3.html')"
+        ],
+        "description": "app.route()"
+    },
+}
