@@ -68,11 +68,19 @@
         ],
         "description": "def function"
     },
-    "my-for-item": {
-        "prefix": "fi",
+    "my-for-item-enumerate": {
+        "prefix": "fie",
         "body": [
             "for int_i, item in enumerate(${1:lst_}):",
             "\tprint(f'{len(${1:lst_})-int_i} \\t| {item}')"
+        ],
+        "description": "for loop with enumeration"
+    },
+    "my-for-item": {
+        "prefix": "fi",
+        "body": [
+            "for item in ${1:df}${2:.columns}:",
+            "\tprint(f'{$3} \\t| {item}')"
         ],
         "description": "for loop with enumeration"
     },
