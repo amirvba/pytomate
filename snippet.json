@@ -1,5 +1,5 @@
 {
-    /// Snippet file for VSCode
+    // Snippet file for VSCode
     // Place your snippets for python here. Each snippet is defined under a snippet name and has a prefix, body and 
     // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
     // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
@@ -61,7 +61,7 @@
     "my-def-function": {
         "prefix": "deff",
         "body": [
-            "def ${1:get_}(${2:DF}):",
+            "def ${1:get_}(${2:DF}, $3):",
             "\treturn ",
             "\n",
             "${1:get_}()"
@@ -76,6 +76,15 @@
         ],
         "description": "for loop with enumeration"
     },
+    "my-for-item-if": {
+        "prefix": "fii",
+        "body": [
+            "for item in ${1:lst_}:",
+            "    if item == $2"
+            "        print(f'{item} \\t| $3')"
+        ],
+        "description": "for loop with enumeration"
+    },
     "my-Print ": {
         "prefix": "pf",
         "body": [
@@ -84,24 +93,19 @@
         "description": "print(f'{} \t| {}')"
     },
     "my-Print2 ": {
-        "prefix": "pp",
+        "prefix": "pr",
         "body": [
             "print($1)"
         ],
         "description": "print()"
     },
-    "amir-flask-run ": {
-        "prefix": "ifm",
+    "my-index-contains ": {
+        "prefix": "indcon",
         "body": [
-            "if __name__ == '__main__': \n\tapp.run(debug=True)"
+            "index_$1 = ${2:df}[${2}['$3'].str.contains('$4', case = False, na=False, regex=True)]",
+            "print(index_$1.sum())",
+            "${2}.loc[index_$1, :]$0"
         ],
         "description": "print()"
-    },
-    "amir-flask-app-route ": {
-        "prefix": "aa",
-        "body": [
-            "app.route('$1')\ndef $2():\n\treturn render_template('$3.html')"
-        ],
-        "description": "app.route()"
     },
 }
