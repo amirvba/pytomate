@@ -195,3 +195,17 @@ def get_dct_log():
     from datetime import datetime
 
     return {'start_time': datetime.now(), 'Ran by': getpass.getuser(), 'Current working directory': os.getcwd()}
+
+
+def get_common_words_in_column(DF, str_col):
+
+    set_base = set(DF[str_col][0].lower().split(" "))
+
+    for item in DF[str_col]:
+        set_row = set(item.lower().split(" "))
+        set_base = {item for item in set_row if item in set_base}
+
+        if set_base == {}:
+            return set_base
+        
+    return set_base
