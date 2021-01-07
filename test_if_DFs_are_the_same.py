@@ -18,9 +18,20 @@ def get_df_diff(DF_1, DF_2, str_column):
     return df_joined[df_joined['_merge'] != 'both']
 
 
+def input_df():
+    df_2 = pd.DataFrame(
+        {'A': [1, 2, 3, 4, 11], 'B': ['a', 'a', 'c', 'd', 'e']})
+
+    df_1 = pd.DataFrame(
+        {'A': [1, 5, 3, 4, 11], 'B': ['a', 'b', 'c', 'd', 'e']})
+
+    return [(df_1, df_2, 'A')]
+
+
+@pytest.mark.parametrize('DF_1, DF_2, str_column', input_df())
 def test_get_df_diff(DF_1, DF_2, str_column):
 
     df_temp = get_df_diff(DF_1, DF_2, str_column)
     str_assert = f'There are differences in the column "{str_column}" between the two DataFrames.\n'
-    str_assert += 'Run get_df_diff() with the same arguments to know more.'
+    str_assert += f'Result of get_df_diff():\n\n {str(df_temp)}\n\n'
     assert len(df_temp) == 0, str_assert
