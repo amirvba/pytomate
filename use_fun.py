@@ -209,3 +209,10 @@ def get_common_words_in_column(DF, str_col):
             return set_base
         
     return set_base
+
+def filter_df_based_on_list_of_search_words(DF, lst_search_words):
+    
+    lst_search_words = [i for i in lst_search_words if i is not ""]
+    assert '' not in lst_search_words, f'There was an empty string in the list. This returns every row!, remove it!'
+    return DF[DF['target'].apply(lambda sentence: any(word in sentence for word in lst_search_wordds))]
+    
