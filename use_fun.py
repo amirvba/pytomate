@@ -5,6 +5,46 @@ import numpy as np
 import os
 import re
 
+def to_excel_from_dct(dct_df, file_name, add_time_tag = False, close_workbook = False):
+
+    import xlwings as xw
+    import os
+    
+    wb = xw.Book()
+    
+    xlSrcRange = 1
+    xlYes = 1
+
+    for name_ in sorted(dct_df.keys(), reverse=True):
+
+        sh = wb.sheets.add(name_)
+        sh.range('A1').options(index = None).value =  dct_df[name_]
+
+        tbl_range = sh.range("A1").expand('table')
+        sh.api.ListObjects.Add(xlSrcRange, tbl_range.address, 0, 1).Name = f"tbl_{name_}"
+        sh.autofit(axis="columns")
+        
+    for sheet in [sh.name for sh in wb.sheets]:
+        if sheet not in dct_df.keys():
+             wb.sheets[sheet].delete()
+                
+    if add_time_tag:
+        from datetime import datetime 
+        file_name = file_name.replace(".xlsx", "")
+        file_name += " -- " + datetime.now().strftime("%Y-%m-%d %H.%M.%S") + ".xlsx"
+        
+    print(f'Working directory: \t| {os.getcwd()}')
+    print(f'Filen name: \t\t| {file_name}')
+    
+    wb.save(file_name) 
+    if close_workbook:
+        wb.close()
+        
+    return file_name
+
+to_excel_from_dct(dct_df, f"{str_xl_name} ++ fuzyy", add_time_tag = True, close_workbook = False)
+
+
 
 def get_df_log(dct_log, lst_rows_top = [], lst_rows_down = []):
     
