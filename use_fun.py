@@ -5,6 +5,13 @@ import numpy as np
 import os
 import re
 
+
+
+def print_lst(lst_, sep_ = " \t| "):
+    lst_ = [str(i) for i in lst_p]
+    print(sep_.join(lst_))
+    
+    
 def to_excel_from_dct(dct_df, file_name, add_time_tag = False, close_workbook = False):
 
     import xlwings as xw
