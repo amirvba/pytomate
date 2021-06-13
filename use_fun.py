@@ -107,6 +107,16 @@ def to_excel_from_dct(dct_df, file_name, add_time_tag = False, close_workbook = 
 to_excel_from_dct(dct_df, f"{str_xl_name} ++ fuzyy", add_time_tag = True, close_workbook = False)
 
 
+def value_counts(DF, str_column):
+    return (pd.DataFrame(DF[str_column]
+             .value_counts(dropna=True))
+             .reset_index()
+             .rename(columns = {str_column:'count'
+                               , 'index':str_column})
+            )
+
+
+# value_counts(df, 'abfahrt_anzahl')
 
 def get_df_log(dct_log, lst_rows_top = [], lst_rows_down = []):
     
