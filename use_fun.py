@@ -48,7 +48,7 @@ def get_fig_frequency(DF, lst_col, title = None, fig_size_x =  18.5, fig_size_y 
     return fig
                   
     
-def to_excel_from_dct(dct_df, file_name, add_time_tag = False, close_workbook = False):
+def to_excel_from_dct(dct_df, file_name, add_time_tag = False, close_workbook = False, dct_fig = None):
 
     import xlwings as xw
     import os
@@ -58,26 +58,45 @@ def to_excel_from_dct(dct_df, file_name, add_time_tag = False, close_workbook = 
     xlSrcRange = 1
     xlYes = 1
 
-    for name_ in sorted(dct_df.keys(), reverse=True):
+    lst_sheets = []
 
+    str_assert = "The sheet names can only have 31 charachter. We are only allows to use this part:\n"
+    if dct_fig:
+        for name_ in sorted(dct_fig.keys(), reverse=True):
+            assert len(name_)<=31, str_assert + f"\n{name_[:31]}"
+            
+            lst_sheets.append(name_)
+            sh = wb.sheets.add(name_)
+            sh.pictures.add(dct_fig[name_], name=name_, update=True)
+
+        print("Figures \t| Successfully added")
+    
+    for name_ in sorted(dct_df.keys(), reverse=True):
+        
+        assert len(name_)<=31, str_assert + f"\n{name_[:31]}"
+        lst_sheets.append(name_)
         sh = wb.sheets.add(name_)
         sh.range('A1').options(index = None).value =  dct_df[name_]
 
         tbl_range = sh.range("A1").expand('table')
         sh.api.ListObjects.Add(xlSrcRange, tbl_range.address, 0, 1).Name = f"tbl_{name_}"
         sh.autofit(axis="columns")
-        
+
+    print("DataFrames \t| Successfully added")
+
+
     for sheet in [sh.name for sh in wb.sheets]:
-        if sheet not in dct_df.keys():
-             wb.sheets[sheet].delete()
+        if sheet not in lst_sheets:
+            print(sheet, "\t| deleted")
+            wb.sheets[sheet].delete()
                 
     if add_time_tag:
         from datetime import datetime 
         file_name = file_name.replace(".xlsx", "")
         file_name += " -- " + datetime.now().strftime("%Y-%m-%d %H.%M.%S") + ".xlsx"
         
-    print(f'Working directory: \t| {os.getcwd()}')
-    print(f'Filen name: \t\t| {file_name}')
+    print(f'\nPath: \t\t| {os.getcwd()}')
+    print(f'Filen name: \t| {file_name}')
     
     wb.save(file_name) 
     if close_workbook:
