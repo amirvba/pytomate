@@ -5,12 +5,48 @@ import numpy as np
 import os
 import re
 
+from xlwings import view
+import xlwings as xw
+import warnings
+warnings.filterwarnings('ignore')
+
+
+%config Completer.use_jedi = False
 
 
 def print_lst(lst_, sep_ = " \t| "):
     lst_ = [str(i) for i in lst_p]
     print(sep_.join(lst_))
     
+   
+def get_fig_frequency(DF, lst_col, title = None, fig_size_x =  18.5, fig_size_y = 10.5):
+    
+    assert len(lst_col)>0, "List of columns is empty."
+    assert [i for i in lst_col if i not in DF.columns] == [], "The list of column was not in the list of DF columns!"
+    
+    if len(lst_col)==1:
+        print("Because of an interal bug, we generate the plots twice!")
+        lst_col = lst_col + lst_col
+        
+    plt.style.use('ggplot')
+
+    fig, axs = plt.subplots(len(lst_col),2)
+
+    if title is not None:
+        fig.suptitle(title)
+
+    for i, col in enumerate(lst_col):
+        print(i,col)
+        axs[i,0].boxplot(DF[col])
+        axs[i,0].set_title(col)
+
+        axs[i,1].hist(DF[col])
+        axs[i,1].set_title(col)
+
+    fig.set_size_inches(fig_size_x, fig_size_y)
+                                          
+    return fig
+                  
     
 def to_excel_from_dct(dct_df, file_name, add_time_tag = False, close_workbook = False):
 
