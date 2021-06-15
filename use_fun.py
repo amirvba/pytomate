@@ -14,6 +14,21 @@ warnings.filterwarnings('ignore')
 %config Completer.use_jedi = False
 
 
+def conv_seconds_2_time_stamp(str_in):
+    
+    hours_ = str_in // (60*60)
+    str_in = str_in - hours_*60*60
+    
+    minutes_ = str_in // (60)
+    seconds_ = str_in - minutes_*60
+
+    seconds_ = round(seconds_, 1)
+
+    return f'{int(hours_)}:{int(minutes_)}:{seconds_}'
+    
+# conv_seconds_2_time_stamp(43200)
+
+
 def print_lst(lst_, sep_ = " \t| "):
     lst_ = [str(i) for i in lst_p]
     print(sep_.join(lst_))
