@@ -13,6 +13,18 @@ warnings.filterwarnings('ignore')
 
 %config Completer.use_jedi = False
 
+def my_ls(str_file_ending=None):
+    
+    import os
+    lst_return = [i for i in os.listdir() if not i.startswith('~')
+                                          if not i.endswith('.ipynb')
+                                          if not i.endswith('.ipynb_checkpoints')]
+    
+    if str_file_ending:
+        return [i for i in lst_return if i.endswith(str_file_ending)]
+    
+    return lst_return
+
 
 def conv_seconds_2_time_stamp(str_in):
     
