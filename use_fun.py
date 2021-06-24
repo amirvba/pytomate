@@ -59,7 +59,7 @@ def get_fig_frequency(DF, lst_col, title = None, fig_size_x =  18.5, fig_size_y 
 
     fig, axs = plt.subplots(len(lst_col),2)
 
-    if title is not None:
+    if title:
         fig.suptitle(title)
 
     for i, col in enumerate(lst_col):
