@@ -11,7 +11,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-%config Completer.use_jedi = False
+# %config Completer.use_jedi = False
 
 def my_ls(str_file_ending=None):
     
@@ -45,7 +45,7 @@ def print_lst(lst_, sep_ = " \t| "):
     lst_ = [str(i) for i in lst_p]
     print(sep_.join(lst_))
     
-   
+    
 def get_fig_frequency(DF, lst_col, title = None, fig_size_x =  18.5, fig_size_y = 10.5):
     
     assert len(lst_col)>0, "List of columns is empty."
@@ -131,7 +131,7 @@ def to_excel_from_dct(dct_df, file_name, add_time_tag = False, close_workbook = 
         
     return file_name
 
-to_excel_from_dct(dct_df, f"{str_xl_name} ++ fuzyy", add_time_tag = True, close_workbook = False)
+# to_excel_from_dct(dct_df, f"{str_xl_name} ++ fuzyy", add_time_tag = True, close_workbook = False)
 
 
 def value_counts(DF, str_column):
@@ -349,9 +349,3 @@ def get_common_words_in_column(DF, str_col):
         
     return set_base
 
-def filter_df_based_on_list_of_search_words(DF, lst_search_words):
-    
-    lst_search_words = [i for i in lst_search_words if i is not ""]
-    assert '' not in lst_search_words, f'There was an empty string in the list. This returns every row!, remove it!'
-    return DF[DF['target'].apply(lambda sentence: any(word in sentence for word in lst_search_wordds))]
-    
