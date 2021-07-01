@@ -13,6 +13,13 @@ warnings.filterwarnings('ignore')
 
 # %config Completer.use_jedi = False
 
+from datetime import datetime 
+def now_():
+    return datetime.now().strftime("%H.%M.%S")
+
+
+now_()
+
 def my_ls(str_file_ending=None):
     
     import os
